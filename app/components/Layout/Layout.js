@@ -7,7 +7,7 @@ import TextField from 'material-ui/TextField';
 import Toolbar from 'material-ui/Toolbar';
 import Paper from 'material-ui/Paper';
 import PaperTitle from '../PaperTitle/PaperTitle';
-import { withStyles } from 'material-ui/styles';
+import withStyles from 'material-ui/styles/withStyles';
 
 const styles = theme => ({
   root: {

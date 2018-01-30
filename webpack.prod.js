@@ -2,7 +2,8 @@ var webpack = require('webpack'),
   HtmlWebpackPlugin = require('html-webpack-plugin'), 
   path = require('path'),
   ExtractTextPlugin = require('extract-text-webpack-plugin'),
-  SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
+  SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin'),
+  BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = {
   devServer: {
@@ -64,6 +65,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './app/index.html'
     }),
-    new ExtractTextPlugin('styles/style.css')
+    new ExtractTextPlugin('styles/style.css'),
+    new BundleAnalyzerPlugin()
   ]
 };

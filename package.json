@@ -57,6 +57,7 @@
     "react-transition-group": "^1.2.0",
     "redux": "^3.7.1",
     "redux-thunk": "^2.2.0",
-    "ssh-deploy-release": "^2.1.0"
+    "ssh-deploy-release": "^2.1.0",
+    "webpack-bundle-analyzer": "^2.9.2"
   }
 }

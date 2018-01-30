@@ -5,7 +5,7 @@ import renderHTML from 'react-render-html';
 import Comments from '../Comments/Comments';
 import Paper from 'material-ui/Paper';
 import Typography from 'material-ui/Typography';
-import { withStyles } from 'material-ui/styles';
+import withStyles from 'material-ui/styles/withStyles';
 
 const styles = theme => ({
   post: {
