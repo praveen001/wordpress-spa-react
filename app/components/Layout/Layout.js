@@ -24,8 +24,8 @@ const styles = theme => ({
     display: 'flex'
   },
   articles: {
-    flex: 1,
-    margin: theme.spacing.unit * 2
+    margin: theme.spacing.unit * 2,
+    width: `calc(76% - ${theme.spacing.unit * 2 * 3}px)`
   },
   sidebar: {
     width: '24%',
