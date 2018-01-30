@@ -13,6 +13,12 @@ const styles = theme => ({
     display: 'flex',
     flexDirection: 'column'
   },
+  logo: {
+    textDecoration: 'none',
+    color: '#fff',
+    fontSize: 26,
+    fontWeight: 500
+  },
   content: {
     display: 'flex'
   },
@@ -41,7 +47,7 @@ class Layout extends React.Component {
           position='static'
         >
           <Toolbar>
-            Source Clone
+            <a href='/' className={classes.logo}>Source Clone</a>
           </Toolbar>
         </AppBar>
         <div className={classes.content}>

@@ -14,6 +14,13 @@ const styles = theme => ({
     fontSize: 36,
     fontWeight: 600
   },
+  featuredImage: {
+    height: 250,
+    textAlign: 'center',
+    '& > img': {
+      maxHeight: '100%'
+    }
+  },
   content: {
     padding: theme.spacing.unit * 2,
     '& p': {
@@ -65,13 +72,18 @@ class BlogPost extends React.Component {
         return <Highlight className='javascript' key={elem.key}>{elem.props.children[0]}</Highlight>;
       }
       return elem;
-    })
+    });
+
+    let featuredImage = <div className={classes.featuredImage}>
+      <img src={this.props.post.post._embedded['wp:featuredmedia'][0].source_url} />
+    </div>
 
     return (
       <div className={classes.post}>
         <article>
           <Paper className={classes.content}>
             <Typography type='title' className={classes.title}>{this.props.post.post.title.rendered}</Typography>
+            {featuredImage}
             {content}
           </Paper>
         </article>
