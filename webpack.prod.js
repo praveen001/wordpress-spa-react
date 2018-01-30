@@ -3,7 +3,8 @@ var webpack = require('webpack'),
   path = require('path'),
   ExtractTextPlugin = require('extract-text-webpack-plugin'),
   SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin'),
-  BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+  BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin,
+  UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
   devServer: {
@@ -66,6 +67,10 @@ module.exports = {
       template: './app/index.html'
     }),
     new ExtractTextPlugin('styles/style.css'),
+    new SWPrecacheWebpackPlugin({
+      navigateFallback: './dist/index.html'
+    }),
+    new UglifyJSPlugin(),
     new BundleAnalyzerPlugin()
   ]
 };

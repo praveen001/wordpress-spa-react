@@ -3,10 +3,12 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { Link, Route, Switch } from 'react-router-dom';
 import { ConnectedRouter, push } from 'react-router-redux';
+import renderHTML from 'react-render-html';
 
 import { History, Store } from './Store';
 import Theme from './Theme.js';
 import Release from './release.json';
+import Axios from './Axios';
 
 // Styles
 import Style from './index.css';

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { CircularProgress } from 'material-ui/Progress';
+import CircularProgress from 'material-ui/Progress/CircularProgress';
 
 class Async extends React.Component {
   constructor(props) {
