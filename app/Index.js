@@ -15,9 +15,10 @@ import Style from './index.css';
 import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
 
 // Containers
+import Async from './components/Async/Async';
 import Layout from './components/Layout/Layout';
-import BlogListContainer from './containers/BlogList';
-import BlogPostContainer from './containers/BlogPostContainer';
+const BlogListContainer = () => import('./containers/BlogList');
+const BlogPostContainer = () => import('./containers/BlogPostContainer');
 
 const theme = createMuiTheme(Theme);
 
@@ -27,8 +28,8 @@ ReactDOM.render(
       <MuiThemeProvider theme={theme}>
         <Layout>
           <Switch>
-            <Route exact path='/' component={BlogListContainer} />
-            <Route path='/:slug' component={BlogPostContainer} />
+            <Route exact path='/' component={(props) => <Async load={BlogListContainer} props={props} />} />
+            <Route path='/:slug' component={(props) => <Async load={BlogPostContainer} props={props} />} />
           </Switch>
         </Layout>
       </MuiThemeProvider>

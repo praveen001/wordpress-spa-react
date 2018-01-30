@@ -1,5 +1,6 @@
 import React from 'react';
 import renderHTML from 'react-render-html';
+import { History } from '../../Store';
 
 import Button from 'material-ui/Button';
 import Paper from 'material-ui/Paper';
@@ -51,6 +52,12 @@ const styles = theme => ({
 });
 
 class BlogSummary extends React.Component {
+
+  goToPost = (e) => {
+    e.preventDefault();
+    History.push(`/${this.props.post.slug}`)
+  }
+
   render() {
     const { classes } = this.props;
     return (
@@ -60,7 +67,7 @@ class BlogSummary extends React.Component {
         </div>
         <article className={classes.postExcerpt}>
           <div>
-            <Typography type='display1' component='a' href={this.props.post.slug} className={classes.title}>{this.props.post.title.rendered}</Typography>
+            <Typography type='display1' component='a' href={this.props.post.slug} onClick={this.goToPost} className={classes.title}>{this.props.post.title.rendered}</Typography>
             {/* {renderHTML(this.props.post.excerpt.rendered)} */}
           </div>
           <div>

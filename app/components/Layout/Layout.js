@@ -1,4 +1,5 @@
 import React from 'react';
+import { History } from '../../Store';
 
 import AdSense from 'react-adsense';
 import AppBar from 'material-ui/AppBar';
@@ -47,7 +48,7 @@ class Layout extends React.Component {
           position='static'
         >
           <Toolbar>
-            <a href='/' className={classes.logo}>Source Clone</a>
+            <a href='' onClick={e => History.push('/')} className={classes.logo}>Source Clone</a>
           </Toolbar>
         </AppBar>
         <div className={classes.content}>
