@@ -31,7 +31,7 @@ module.exports = {
       test: /\.css$/,
       use: ExtractTextPlugin.extract({
         fallback: "style-loader",
-        use: "css-loader?modules=true&localIdentName=[name][local][hash:base64:5]"
+        use: "css-loader?localIdentName=[local]"
       })
     }, {
       test: /\.(jpe?g|png|gif|svg)$/i,

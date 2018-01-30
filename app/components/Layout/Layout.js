@@ -1,5 +1,6 @@
 import React from 'react';
 
+import AdSense from 'react-adsense';
 import AppBar from 'material-ui/AppBar';
 import TextField from 'material-ui/TextField';
 import Toolbar from 'material-ui/Toolbar';
@@ -55,7 +56,10 @@ class Layout extends React.Component {
               <PaperTitle title='Recent Posts' />
             </Paper>
             <Paper style={{position: 'sticky', top: 16}}>
-              <PaperTitle title='Advertisement' />
+              <AdSense.Google client='ca-pub-2201766662007361'
+                slot='8424881597'
+                format='auto' 
+              />
             </Paper>
           </aside>
         </div>

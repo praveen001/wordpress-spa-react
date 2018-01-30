@@ -7,25 +7,26 @@ import Paper from 'material-ui/Paper';
 import Typography from 'material-ui/Typography';
 import { withStyles } from 'material-ui/styles';
 
-import CodeSnippetStyles from '../../../node_modules/highlight.js/styles/vs2015.css';
-
 const styles = theme => ({
   post: {
   },
   title: {
     fontSize: 36,
-    fontWeight: 300
+    fontWeight: 600
   },
   content: {
     padding: theme.spacing.unit * 2,
-    '& > p': {
-      fontSize: 22,
+    '& p': {
+      fontSize: 18,
       letterSpacing: 0.6,
-      color: '#30404a',
+      color: 'rgba(0, 0, 0, 0.87)',
+      lineHeight: '28px',
       '& > strong': {
-        fontSize: 30,
-        fontWeight: 400,
-        color: '#000'
+        fontSize: 26,
+        fontWeight: 500,
+        color: 'rgba(0, 0, 0, 0.87)',
+        display: 'inline-block',
+        marginTop: 20
       }
     },
     '& > blockquote': {
