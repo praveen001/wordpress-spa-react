@@ -8,7 +8,7 @@ import RootReducer from './RootReducer';
 const History = createHistory();
 const middleware = routerMiddleware(History);
 
-const defaultState = {};
+const defaultState = { ...window.__INITIAL_STATE__ };
 
 const Store = createStore(RootReducer, defaultState, compose(applyMiddleware(middleware), applyMiddleware(thunk), window.devToolsExtension ? window.devToolsExtension() : f => f) );
 
