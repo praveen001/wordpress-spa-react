@@ -1,5 +1,5 @@
 import React from 'react';
-import { History } from '../../Store';
+import { Link } from 'react-router-dom';
 
 import AdSense from 'react-adsense';
 import AppBar from 'material-ui/AppBar';
@@ -40,6 +40,15 @@ const styles = theme => ({
 });
 
 class Layout extends React.Component {
+  
+  // Remove the server-side injected CSS.
+  componentDidMount() {
+    const jssStyles = document.getElementById('jss-server-side');
+    if (jssStyles && jssStyles.parentNode) {
+      jssStyles.parentNode.removeChild(jssStyles);
+    }
+  }
+
   render() {
     const { classes } = this.props;
     return (
@@ -48,7 +57,7 @@ class Layout extends React.Component {
           position='static'
         >
           <Toolbar>
-            <a href='' onClick={e => History.push('/')} className={classes.logo}>Source Clone</a>
+            <Link to='/' className={classes.logo}>Source Clone</Link>
           </Toolbar>
         </AppBar>
         <div className={classes.content}>

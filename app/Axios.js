@@ -1,8 +1,6 @@
 import axios from 'axios';
 
-import { Store } from './Store';
-
-var baseURL = window.location.hostname.indexOf('production.com') == -1 ? 'https://api.sourceclone.com' : 'https://api.sourceclone.com'
+var baseURL = 'https://api.sourceclone.com'
 
 const instance = axios.create({
   baseURL

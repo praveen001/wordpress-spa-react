@@ -1,12 +1,20 @@
-import { renderRoutes } from 'react-router-config';
+import React from 'react';
+import { Route } from 'react-router-dom';
 import BlogList from './containers/BlogList';
 import BlogPost from './containers/BlogPostContainer';
-import React from 'react';
 
-class test extends React.Component {
-  render() {
-    return <p>Test</p>
-  }
+const AppRoot = ({route}) => {
+  return (
+    <div>
+      {renderClientRoutes(route.routes)}
+    </div>
+  )
+}
+
+function renderClientRoutes(routes) {
+  return routes.map((route, i) => {
+    return <Route key={i} path={route.path} component={(props) => <route.component {...props} route={route} />} />
+  });
 }
 
 const routes = [
@@ -15,21 +23,15 @@ const routes = [
     routes: [
       {
         path: '/',
-        component: test
+        exact: true,
+        component: BlogList
+      }, {
+        path: '/:slug',
+        component: BlogPost
       }
     ]
   }
 ];
-
-const AppRoot = ({route}) => {
-  console.log(props);
-  return (
-    <div>
-      <h1>Root</h1>
-      {/* {renderRoutes(route.routes)} */}
-    </div>
-  )
-}
 
 export {
   routes,

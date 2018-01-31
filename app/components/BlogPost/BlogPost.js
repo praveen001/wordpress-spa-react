@@ -6,6 +6,7 @@ import Comments from '../Comments/Comments';
 import Paper from 'material-ui/Paper';
 import Typography from 'material-ui/Typography';
 import withStyles from 'material-ui/styles/withStyles';
+import { loadPost } from '../../actions/BlogPostActions';
 
 const styles = theme => ({
   post: {
@@ -50,6 +51,10 @@ const styles = theme => ({
 class BlogPost extends React.Component {
   componentDidMount() {
     this.init();
+  }
+
+  static fetchData(dispatch, params) {
+    return loadPost(params.slug)(dispatch);
   }
 
   init = () => {
