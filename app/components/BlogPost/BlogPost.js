@@ -6,6 +6,7 @@ import Comments from '../Comments/Comments';
 import Paper from 'material-ui/Paper';
 import Typography from 'material-ui/Typography';
 import withStyles from 'material-ui/styles/withStyles';
+import { loadPost } from '../../actions/BlogPostActions';
 
 const styles = theme => ({
   post: {
@@ -48,8 +49,19 @@ const styles = theme => ({
 });
 
 class BlogPost extends React.Component {
+
+  componentDidUpdate(prevProps) {
+    document.title = this.props.post.post.title.rendered;
+  }
+
   componentDidMount() {
-    this.init();
+    if (this.props.post.post.slug != this.props.match.params.slug) {
+      this.init();
+    }
+  }
+
+  static fetchData(dispatch, params) {
+    return loadPost(params.slug)(dispatch);
   }
 
   init = () => {

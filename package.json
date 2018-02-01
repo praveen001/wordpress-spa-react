@@ -7,6 +7,7 @@
     "start": "./node_modules/webpack-dev-server/bin/webpack-dev-server.js --env.type=dev --progress --profile --colors",
     "local": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js --env.type=dev  --host 0.0.0.0 --progress --profile --colors --config ./webpack.config.js",
     "build": "node ./node_modules/webpack/bin/webpack.js -p --env.type=prod --progress --profile --colors --config ./webpack.config.js",
+    "ssr": "node ./node_modules/webpack/bin/webpack.js -p --env.type=ssr --progress --profile --colors --config ./webpack.config.js",
     "deploy": "./node_modules/webpack/bin/webpack.js -p --env.type=prod --env.ssh=true --progress --profile --colors"
   },
   "author": "",
@@ -36,13 +37,18 @@
   "dependencies": {
     "autosuggest-highlight": "^3.1.1",
     "axios": "^0.16.2",
+    "babel-cli": "^6.26.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-react-hmre": "^1.1.1",
+    "compression": "^1.7.1",
+    "ejs-loader": "^0.3.0",
     "history": "^4.6.3",
     "image-webpack-loader": "^3.3.1",
     "material-ui": "^v1.0.0-beta.21",
     "material-ui-icons": "^1.0.0-beta.5",
     "moment": "^2.18.1",
     "prop-types": "^15.5.10",
+    "raw-loader": "^0.5.1",
     "react": "^15.6.1",
     "react-adsense": "0.0.3",
     "react-autosuggest": "^9.3.2",
@@ -52,13 +58,15 @@
     "react-player": "^0.20.0",
     "react-redux": "^5.0.5",
     "react-render-html": "^0.6.0",
-    "react-router": "^4.1.1",
-    "react-router-dom": "^4.1.1",
-    "react-router-redux": "^5.0.0-alpha.6",
+    "react-router": "^4.2.0",
+    "react-router-config": "^1.0.0-beta.4",
+    "react-router-dom": "^4.2.2",
+    "react-router-redux": "^4.0.8",
     "react-transition-group": "^1.2.0",
     "redux": "^3.7.1",
     "redux-thunk": "^2.2.0",
     "ssh-deploy-release": "^2.1.0",
-    "webpack-bundle-analyzer": "^2.9.2"
+    "webpack-bundle-analyzer": "^2.9.2",
+    "webpack-node-externals": "^1.6.0"
   }
 }

@@ -4,7 +4,8 @@ var webpack = require('webpack'),
   ExtractTextPlugin = require('extract-text-webpack-plugin'),
   SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin'),
   BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin,
-  UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+  UglifyJSPlugin = require('uglifyjs-webpack-plugin'),
+  nodeExternals = require('webpack-node-externals');
 
 module.exports = {
   devServer: {
@@ -17,7 +18,7 @@ module.exports = {
   output: {
     filename: '[name].[hash].js',
     path: path.join(__dirname, '/dist'),
-    publicPath: '/',
+    publicPath: '/dist/',
     sourceMapFilename: '[name].map'
   },
 
@@ -61,16 +62,21 @@ module.exports = {
       minChunks(module, count) {
         var context = module.context;
         return context && context.indexOf('node_modules') >= 0;
-      },
+      }
     }),
     new HtmlWebpackPlugin({
-      template: './app/index.html'
+      template: './app/index.html',
+      filename: 'index.html'
+    }),
+    new HtmlWebpackPlugin({
+      template: '!!raw-loader!./app/server.ejs',
+      inject: true,
+      filename: 'server.ejs'
     }),
     new ExtractTextPlugin('styles/style.css'),
     new SWPrecacheWebpackPlugin({
       navigateFallback: './dist/index.html'
     }),
-    new UglifyJSPlugin(),
-    new BundleAnalyzerPlugin()
+    new UglifyJSPlugin()
   ]
 };

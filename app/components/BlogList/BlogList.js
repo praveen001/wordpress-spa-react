@@ -1,8 +1,8 @@
 import React from 'react';
-import { History } from '../../Store';
 
 import BlogSummary from '../BlogSummary/BlogSummary';
 import withStyles from 'material-ui/styles/withStyles';
+import { loadPostList } from '../../actions/BlogListActions';
 
 const styles = theme => ({
   postListWrap: {
@@ -14,7 +14,14 @@ const styles = theme => ({
 
 class BlogList extends React.Component {
   componentDidMount() {
-    this.init();
+    document.title = 'Source Clone';
+    if (this.props.list.postIds.length == 0) {
+      this.init();
+    }
+  }
+
+  static fetchData(dispatch) {
+    return loadPostList(1)(dispatch);
   }
 
   init = () => {

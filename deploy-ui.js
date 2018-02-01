@@ -16,7 +16,7 @@ execSync('mkdir public', (err) => {
     
 });
 
-execSync('cp ssr.js public/server.js', (err) => {
+execSync('cp server.js public/server.js', (err) => {
     if (err) {
         console.log(err);
     }

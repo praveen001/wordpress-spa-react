@@ -1,14 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { Link, Route, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import { ConnectedRouter, push } from 'react-router-redux';
 import renderHTML from 'react-render-html';
 
-import { History, Store } from './Store';
 import Theme from './Theme.js';
 import Release from './release.json';
 import Axios from './Axios';
+import {BrowserRouter} from 'react-router-dom';
+import { Store } from './Store';
 
 // Styles
 import Style from './index.css';
@@ -24,18 +25,17 @@ const BlogPostContainer = () => import('./containers/BlogPostContainer');
 
 const theme = createMuiTheme(Theme);
 
-ReactDOM.render(
+ReactDOM.render((
   <Provider store={Store}>
-    <ConnectedRouter history={History}>
+    <BrowserRouter>
       <MuiThemeProvider theme={theme}>
         <Layout>
-          <Switch>
+          <Switch>    
             <Route exact path='/' component={(props) => <Async load={BlogListContainer} props={props} />} />
             <Route path='/:slug' component={(props) => <Async load={BlogPostContainer} props={props} />} />
           </Switch>
         </Layout>
       </MuiThemeProvider>
-    </ConnectedRouter>
-  </Provider>, 
-  document.getElementById('app')
-);
+    </BrowserRouter>
+  </Provider>
+), document.getElementById('app'))
