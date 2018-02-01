@@ -14,6 +14,7 @@ const styles = theme => ({
 
 class BlogList extends React.Component {
   componentDidMount() {
+    document.title = 'Source Clone';
     if (this.props.list.postIds.length == 0) {
       this.init();
     }

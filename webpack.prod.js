@@ -4,7 +4,8 @@ var webpack = require('webpack'),
   ExtractTextPlugin = require('extract-text-webpack-plugin'),
   SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin'),
   BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin,
-  UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+  UglifyJSPlugin = require('uglifyjs-webpack-plugin'),
+  nodeExternals = require('webpack-node-externals');
 
 module.exports = {
   devServer: {
@@ -61,7 +62,7 @@ module.exports = {
       minChunks(module, count) {
         var context = module.context;
         return context && context.indexOf('node_modules') >= 0;
-      },
+      }
     }),
     new HtmlWebpackPlugin({
       template: './app/index.html',

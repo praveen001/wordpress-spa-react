@@ -49,6 +49,11 @@ const styles = theme => ({
 });
 
 class BlogPost extends React.Component {
+
+  componentDidUpdate(prevProps) {
+    document.title = this.props.post.post.title.rendered;
+  }
+
   componentDidMount() {
     if (this.props.post.post.slug != this.props.match.params.slug) {
       this.init();

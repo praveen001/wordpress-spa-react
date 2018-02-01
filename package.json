@@ -7,6 +7,7 @@
     "start": "./node_modules/webpack-dev-server/bin/webpack-dev-server.js --env.type=dev --progress --profile --colors",
     "local": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js --env.type=dev  --host 0.0.0.0 --progress --profile --colors --config ./webpack.config.js",
     "build": "node ./node_modules/webpack/bin/webpack.js -p --env.type=prod --progress --profile --colors --config ./webpack.config.js",
+    "ssr": "node ./node_modules/webpack/bin/webpack.js -p --env.type=ssr --progress --profile --colors --config ./webpack.config.js",
     "deploy": "./node_modules/webpack/bin/webpack.js -p --env.type=prod --env.ssh=true --progress --profile --colors"
   },
   "author": "",
@@ -37,7 +38,9 @@
     "autosuggest-highlight": "^3.1.1",
     "axios": "^0.16.2",
     "babel-cli": "^6.26.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-react-hmre": "^1.1.1",
+    "compression": "^1.7.1",
     "ejs-loader": "^0.3.0",
     "history": "^4.6.3",
     "image-webpack-loader": "^3.3.1",
@@ -63,6 +66,7 @@
     "redux": "^3.7.1",
     "redux-thunk": "^2.2.0",
     "ssh-deploy-release": "^2.1.0",
-    "webpack-bundle-analyzer": "^2.9.2"
+    "webpack-bundle-analyzer": "^2.9.2",
+    "webpack-node-externals": "^1.6.0"
   }
 }
