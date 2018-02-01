@@ -12,6 +12,7 @@ const styles = theme => ({
   post: {
     display: 'flex',
     marginBottom: theme.spacing.unit * 2,
+    marginRight: theme.spacing.unit * 2,
     width: `calc(33% - ${theme.spacing.unit * 2}px)`,
     flexDirection: 'column',
     border: '1px solid transparent',

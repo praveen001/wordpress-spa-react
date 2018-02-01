@@ -8,7 +8,7 @@ const styles = theme => ({
   postListWrap: {
     display: 'flex',
     flexWrap: 'wrap',
-    justifyContent: 'space-between'
+    justifyContent: 'flex-start'
   }
 });
 
