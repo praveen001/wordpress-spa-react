@@ -12,30 +12,32 @@ import { Switch } from 'react-router-dom';
 
 import RootReducer from './app/RootReducer';
 import { routes } from './app/Routes';
-import { loadPostList } from './app/actions/BlogListActions';
-import { loadPost } from './app/actions/BlogPostActions';
 import Theme from './app/Theme';
 import Layout from './app/components/Layout/Layout';
-import BlogListContainer from './app/containers/BlogList';
-import BlogPostContainer from './app/containers/BlogPostContainer';
 
 const app = express();
 
 app.use('/dist', express.static('dist'));
 
 app.get('*', (req, res) => {
-  const sheetsRegistry = new SheetsRegistry();
-  const generateClassName = createGenerateClassName();
-  let context = {}, theme = createMuiTheme(Theme), store = createStore(RootReducer);
+  let sheetsRegistry = new SheetsRegistry(),
+    generateClassName = createGenerateClassName(),
+    context = {},
+    theme = createMuiTheme(Theme),
+    store = createStore(RootReducer),
+    branch = matchRoutes(routes, req.url), 
+    promises = [],
+    state,
+    css,
+    content;
 
-  const branch = matchRoutes(routes, req.url);
-  const promises = branch.map(({ route, match }) => {
+  promises = branch.map(({ route, match }) => {
     let fetchData = route.component.fetchData;
-    return fetchData instanceof Function ? fetchData(store.dispatch, match.params) : Promise.resolve(null)
+    return fetchData instanceof Function ? fetchData(store.dispatch, match.params) : Promise.resolve(null);
   });
 
   Promise.all(promises).then(([...response]) => {
-    const content = renderToString(
+    content = renderToString(
       <Provider store={store}>
         <StaticRouter location={req.url} context={context}>
           <JssProvider registry={sheetsRegistry} generateClassName={generateClassName}>
@@ -49,14 +51,14 @@ app.get('*', (req, res) => {
           </JssProvider>
         </StaticRouter>
       </Provider>
-    )
-    const state = store.getState();
-    const css = sheetsRegistry.toString()
-    res.send(renderFullPage('Express', false, content, state, css))
+    );
+    state = store.getState();
+    css = sheetsRegistry.toString();
+    res.send(renderFullPage('Source Clone', content, state, css));
   });
 });
 
-function renderFullPage(title, data, content, state, css) {
+function renderFullPage(title, content, state, css) {
   return `
     <!doctype html>
     <html>
