@@ -64,13 +64,18 @@ module.exports = {
       },
     }),
     new HtmlWebpackPlugin({
-      template: './app/index.html'
+      template: './app/index.html',
+      filename: 'index.html'
+    }),
+    new HtmlWebpackPlugin({
+      template: '!!raw-loader!./app/server.ejs',
+      inject: true,
+      filename: 'server.ejs'
     }),
     new ExtractTextPlugin('styles/style.css'),
     new SWPrecacheWebpackPlugin({
       navigateFallback: './dist/index.html'
     }),
-    new UglifyJSPlugin(),
-    new BundleAnalyzerPlugin()
+    new UglifyJSPlugin()
   ]
 };

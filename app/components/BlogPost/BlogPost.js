@@ -50,7 +50,9 @@ const styles = theme => ({
 
 class BlogPost extends React.Component {
   componentDidMount() {
-    this.init();
+    if (this.props.post.post.slug != this.props.match.params.slug) {
+      this.init();
+    }
   }
 
   static fetchData(dispatch, params) {

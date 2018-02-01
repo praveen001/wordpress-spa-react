@@ -14,7 +14,9 @@ const styles = theme => ({
 
 class BlogList extends React.Component {
   componentDidMount() {
-    this.init();
+    if (this.props.list.postIds.length == 0) {
+      this.init();
+    }
   }
 
   static fetchData(dispatch) {
