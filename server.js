@@ -24,15 +24,17 @@ app.use(compression());
 
 app.get('/', (req, res) => {
   buildUI(req).then(data => {
-    let { content, state, css } = data;
-    res.render('server.ejs', { title: 'Source clone', content, state, css });
+    let { content, state, stateString, css } = data;
+    res.render('server.ejs', { title: 'Source clone', metaDescription: defaultMetaDescription, metaKeywords: defaultMetaKeywords, content, state: stateString, css });
   });
 });
 
 app.get('/:slug', (req, res) => {
   buildUI(req).then(data => {
     let { content, state, stateString, css } = data;
-    res.render('server.ejs', { title: state.post.post.title.rendered, content, state: stateString, css });
+    let metaDescription = state.post.post.title.rendered,
+      metaKeywords = getPostTags(state.post.post).join(',');
+    res.render('server.ejs', { title: state.post.post.title.rendered, metaDescription, metaKeywords, content, state: stateString, css });
   });
 });
 
@@ -78,4 +80,19 @@ function buildUI(req) {
   });
 }
 
+function getPostTags(post) {
+  var tags = [];
+  post._embedded['wp:term'].forEach(x => {
+    x.forEach(y => {
+      tags.push(y.name);
+    });
+  });
+  return tags;
+}
+
 app.listen(8888);
+
+
+var defaultMetaDescription = 'Javascript programming tutorials';
+
+var defaultMetaKeywords = 'javascript, react, webpack, express, nodejs, tutorials, redux, material-ui';

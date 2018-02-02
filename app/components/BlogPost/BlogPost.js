@@ -51,7 +51,9 @@ const styles = theme => ({
 class BlogPost extends React.Component {
 
   componentDidUpdate(prevProps) {
-    document.title = this.props.post.post.title.rendered;
+    if (!this.props.post.loading) {
+      document.title = this.props.post.post.title.rendered;
+    }
   }
 
   componentDidMount() {

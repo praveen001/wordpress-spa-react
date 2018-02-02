@@ -65,12 +65,12 @@ class Layout extends React.Component {
             {this.props.children}
           </div>
           <aside className={classes.sidebar}>
-            <Paper>
+            {/* <Paper>
               <PaperTitle title='Social Media' />
             </Paper>
             <Paper>
               <PaperTitle title='Recent Posts' />
-            </Paper>
+            </Paper> */}
             <Paper style={{position: 'sticky', top: 16}}>
               <AdSense.Google client='ca-pub-2201766662007361'
                 slot='8424881597'
