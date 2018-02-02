@@ -10,6 +10,7 @@ import JssProvider from 'react-jss/lib/JssProvider';
 import { MuiThemeProvider, createMuiTheme, createGenerateClassName } from 'material-ui/styles';
 import { Switch } from 'react-router-dom';
 import compression from 'compression';
+import striptags from 'striptags';
 import RootReducer from './app/RootReducer';
 import { routes } from './app/Routes';
 import Theme from './app/Theme';
@@ -32,7 +33,7 @@ app.get('/', (req, res) => {
 app.get('/:slug', (req, res) => {
   buildUI(req).then(data => {
     let { content, state, stateString, css } = data;
-    let metaDescription = state.post.post.title.rendered,
+    let metaDescription = striptags(state.post.post.excerpt.rendered),
       metaKeywords = getPostTags(state.post.post).join(',');
     res.render('server.ejs', { title: state.post.post.title.rendered, metaDescription, metaKeywords, content, state: stateString, css });
   });
