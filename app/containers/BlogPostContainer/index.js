@@ -1,7 +1,7 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import { loadPost } from '../../actions/BlogPostActions';
+import { loadPost, postComment } from '../../actions/BlogPostActions';
 import BlogPost from '../../components/BlogPost/BlogPost';
 
 function mapStateToProps(state) {
@@ -12,7 +12,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
-    loadPost
+    loadPost, postComment
   }, dispatch);
 }
 

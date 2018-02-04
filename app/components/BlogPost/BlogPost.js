@@ -2,8 +2,11 @@ import React from 'react';
 import Highlight from 'react-highlight';
 import renderHTML from 'react-render-html';
 
+import Chip from 'material-ui/Chip';
 import Comments from '../Comments/Comments';
 import Paper from 'material-ui/Paper';
+import { LinearProgress } from 'material-ui/Progress';
+import TagIcon from 'material-ui-icons/LocalOffer';
 import Typography from 'material-ui/Typography';
 import withStyles from 'material-ui/styles/withStyles';
 import { loadPost } from '../../actions/BlogPostActions';
@@ -45,6 +48,19 @@ const styles = theme => ({
       fontStyle: 'italic',
       marginLeft: 10
     }
+  },
+  tags: {
+    marginTop: 50,
+    paddingTop: theme.spacing.unit * 2,
+    borderTop: '1px solid #ccc',
+    display: 'flex',
+    alignItems: 'center'
+  },
+  tag: {
+    marginLeft: theme.spacing.unit
+  },
+  loadingPaper: {
+    height: '80%'
   }
 });
 
@@ -70,14 +86,24 @@ class BlogPost extends React.Component {
     this.props.loadPost(this.props.match.params.slug);
   }
 
-  onComment = (author, parent, comment) => {
+  getTags = () => {
+    return this.props.post.post._embedded['wp:term'][1].map( x => x.slug );
+  }
 
+  onComment = (parent, comment) => {
+    this.props.postComment(this.props.post.post.id, parent, comment);
   }
 
   render() {
     const { classes } = this.props;
     if (this.props.post.loading) {
-      return <Typography>Loading...</Typography>
+      return <div className={classes.post}>
+        <article>
+          <Paper className={classes.loadingPaper}>
+            <LinearProgress color="primary" />
+          </Paper>
+        </article>
+      </div>
     }
 
     let content = renderHTML(this.props.post.post.content.rendered);
@@ -96,13 +122,21 @@ class BlogPost extends React.Component {
       <div className={classes.post}>
         <article>
           <Paper className={classes.content}>
-            <Typography type='title' className={classes.title}>{this.props.post.post.title.rendered}</Typography>
+            <Typography component='h1' type='title' className={classes.title}>{this.props.post.post.title.rendered}</Typography>
             {featuredImage}
             {content}
+            <div className={classes.tags}>
+              <TagIcon />
+              {
+                this.getTags().map((tag, i) => {
+                  return <Chip component='span' key={i} className={classes.tag} label={tag} />
+                })
+              }
+            </div>
           </Paper>
         </article>
         <div className={classes.comments}>
-          {/* <Comments comments={this.props.post.post._embedded.replies[0]} onComment={this.onComment} /> */}
+          <Comments comments={this.props.post.post._embedded.replies ? this.props.post.post._embedded.replies[0] : []} onComment={this.onComment} />
         </div>
       </div>
     );

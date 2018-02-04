@@ -33,3 +33,29 @@ export function loadPost(slug) {
         });
     };
 }
+
+export function postComment(postId, parentComment, comment) {
+    let payload = {
+        author_name: comment.name,
+        author_email: comment.email,
+        content: comment.comment,
+        parent: parentComment,
+        post: postId,
+        date: new Date()
+    };
+    return dispatch => {
+        return Axios.post(`/wp-json/wp/v2/comments`, payload).then(response => {
+            dispatch(postedComment(comment, postId));
+            return response.data;
+        });
+    }
+}
+
+export function postedComment(comment, postId) {
+    return {
+        type: 'POST_COMMENT',
+        payload: {
+            comment, postId
+        }
+    }
+}

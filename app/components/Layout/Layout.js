@@ -4,6 +4,8 @@ import { withRouter } from 'react-router'
 
 import AdSense from 'react-adsense';
 import AppBar from 'material-ui/AppBar';
+import Grid from 'material-ui/Grid';
+import Hidden from 'material-ui/Hidden';
 import TextField from 'material-ui/TextField';
 import Toolbar from 'material-ui/Toolbar';
 import Paper from 'material-ui/Paper';
@@ -22,16 +24,12 @@ const styles = theme => ({
     fontWeight: 500
   },
   content: {
-    display: 'flex'
+    width: '100%',
+    margin: 0
   },
   articles: {
-    margin: theme.spacing.unit * 2,
-    width: `calc(76% - ${theme.spacing.unit * 2 * 3}px)`
   },
   sidebar: {
-    width: '24%',
-    margin: theme.spacing.unit * 2,
-    marginLeft: 0,
     '& > div': {
       padding: theme.spacing.unit * 2,
       marginBottom: theme.spacing.unit * 2,
@@ -66,25 +64,27 @@ class Layout extends React.Component {
             <a href='https://sourceclone.com/' className={classes.logo} onClick={this.goToHome}>Source Clone</a>
           </Toolbar>
         </AppBar>
-        <div className={classes.content}>
-          <div className={classes.articles}>
+        <Grid container spacing={16} className={classes.content}>
+          <Grid item xs={12} md={9} lg={9} className={classes.articles}>
             {this.props.children}
-          </div>
-          <aside className={classes.sidebar}>
-            {/* <Paper>
-              <PaperTitle title='Social Media' />
-            </Paper>
-            <Paper>
-              <PaperTitle title='Recent Posts' />
-            </Paper> */}
-            <Paper style={{position: 'sticky', top: 16}}>
-              <AdSense.Google client='ca-pub-2201766662007361'
-                slot='8424881597'
-                format='auto' 
-              />
-            </Paper>
-          </aside>
-        </div>
+          </Grid>
+          <Grid item xs={12} md={3} lg={3}>
+            <aside className={classes.sidebar}>
+              {/* <Paper>
+                <PaperTitle title='Social Media' />
+              </Paper>
+              <Paper>
+                <PaperTitle title='Recent Posts' />
+              </Paper> */}
+              <Paper style={{position: 'sticky', top: 16}}>
+                <AdSense.Google client='ca-pub-2201766662007361'
+                  slot='8424881597'
+                  format='auto' 
+                />
+              </Paper>
+            </aside>
+          </Grid>
+        </Grid>
       </div>
     );
   }
