@@ -2,6 +2,7 @@ import React from 'react';
 import renderHTML from 'react-render-html';
 // import { History } from '../../Store';
 import { Link } from 'react-router-dom';
+import { withRouter } from 'react-router'
 
 import Button from 'material-ui/Button';
 import Paper from 'material-ui/Paper';
@@ -54,6 +55,12 @@ const styles = theme => ({
 });
 
 class BlogSummary extends React.Component {
+
+  goToPost = (e) => {
+    e.preventDefault();
+    this.props.history.push('/'+this.props.post.slug);
+  }
+
   render() {
     const { classes } = this.props;
     return (
@@ -63,7 +70,7 @@ class BlogSummary extends React.Component {
         </div>
         <article className={classes.postExcerpt}>
           <div>
-            <Typography type='display1' component={Link} to={this.props.post.slug} className={classes.title}>{this.props.post.title.rendered}</Typography>
+            <Typography type='display1' component='a' href={`https://sourceclone.com/${this.props.post.slug}`} onClick={this.goToPost} className={classes.title}>{this.props.post.title.rendered}</Typography>
             {/* {renderHTML(this.props.post.excerpt.rendered)} */}
           </div>
           <div>
@@ -75,4 +82,4 @@ class BlogSummary extends React.Component {
   }
 }
 
-export default withStyles(styles)(BlogSummary);
+export default withRouter(withStyles(styles)(BlogSummary));

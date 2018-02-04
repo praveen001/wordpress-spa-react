@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { withRouter } from 'react-router'
 
 import AdSense from 'react-adsense';
 import AppBar from 'material-ui/AppBar';
@@ -49,6 +50,11 @@ class Layout extends React.Component {
     }
   }
 
+  goToHome = (e) => {
+    e.preventDefault();
+    this.props.history.push('/');
+  }
+
   render() {
     const { classes } = this.props;
     return (
@@ -57,7 +63,7 @@ class Layout extends React.Component {
           position='static'
         >
           <Toolbar>
-            <Link to='/' className={classes.logo}>Source Clone</Link>
+            <a href='https://sourceclone.com/' className={classes.logo} onClick={this.goToHome}>Source Clone</a>
           </Toolbar>
         </AppBar>
         <div className={classes.content}>
@@ -84,4 +90,4 @@ class Layout extends React.Component {
   }
 }
 
-export default withStyles(styles)(Layout);
+export default withRouter(withStyles(styles)(Layout));
